@@ -18,10 +18,10 @@ const seed = ({
 	costsData,
 	checklistData,
 }: {
-	usersData: [];
-	tripsData: [];
-	costsData: [];
-	checklistData: [];
+	usersData: Users[];
+	tripsData: Trips[];
+	costsData: DailyExpectedCost[];
+	checklistData: Checklist[];
 }) => {
 	return db
 		.query(`DROP TABLE IF EXISTS users`)

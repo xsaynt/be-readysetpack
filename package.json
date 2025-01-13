@@ -5,7 +5,9 @@
 	"main": "index.js",
 	"scripts": {
 		"test": "echo \"Error: no test specified\" && exit 1",
-		"setup-dbs": "psql -f ./db/setup.sql"
+		"setup-dbs": "psql -f ./db/setup.sql",
+		"seed": "ts-node -r ./db/seeds/run-seed.ts",
+		"scratch": "psql -f scratch.sql > scratch.txt"
 	},
 	"keywords": [],
 	"author": "",
