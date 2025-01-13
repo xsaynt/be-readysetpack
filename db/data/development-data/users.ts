@@ -22,5 +22,3 @@ const usersData: Users[] = [
 		name: 'onur',
 	},
 ];
-
-export default usersData;

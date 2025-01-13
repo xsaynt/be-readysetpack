@@ -26,5 +26,3 @@ const checklistData: Checklist[] = [
 		items: ['shirt', 'trousers', 'toiletries'],
 	},
 ];
-
-export default checklistData;

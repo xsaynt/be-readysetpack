@@ -18,5 +18,3 @@ const costsData: DailyExpectedCost[] = [
 		daily_cost_in_dollars: 1250,
 	},
 ];
-
-export default costsData;

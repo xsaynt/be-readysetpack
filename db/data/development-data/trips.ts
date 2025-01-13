@@ -113,5 +113,3 @@ const tripsData: Trips[] = [
 		daily_expected_cost: 200,
 	},
 ];
-
-export default tripsData;
