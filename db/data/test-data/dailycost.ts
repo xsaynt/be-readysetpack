@@ -19,4 +19,4 @@ const costsData: DailyExpectedCost[] = [
 	},
 ];
 
-export default costsData;
+export default costsData

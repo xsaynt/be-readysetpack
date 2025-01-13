@@ -1,1 +1,29 @@
-You are now connected to database "ready_set_pack" as user "aprice".
+You are now connected to database "ready_set_pack" as user "onuryilmaz24".
+ user_id |  username  |  name   
+---------+------------+---------
+       1 | alex123    | alex
+       2 | matthew123 | matthew
+       3 | kaye123    | kaye
+       4 | clare123   | clare
+       5 | onur123    | onur
+(5 rows)
+
+ trip_id | user_id |                        destination                        | start_date |  end_date  | passport_issued_country |                 weather                 | is_need_visa |               budget                | is_booked_hotel | people_count |    city_information    |                                             landmarks                                              |                                                events                                                | daily_expected_cost 
+---------+---------+-----------------------------------------------------------+------------+------------+-------------------------+-----------------------------------------+--------------+-------------------------------------+-----------------+--------------+------------------------+----------------------------------------------------------------------------------------------------+------------------------------------------------------------------------------------------------------+---------------------
+       1 |       1 | {"city": "Paris", "country": "FR", "currency": "EUR"}     | 13/01/2025 | 23/01/2025 | UK                      | {"temp": 20, "weather_type": "Sunny"}   | f            | {"amount": 2000, "currency": "EUR"} | t               |            1 | Capital of France      | {"best_places_to_visit": ["Tower", "City Center", "Museum"], "img_url_of_landmarks": ["", "", ""]} | [{"img": "", "date": "15/01/2025", "name": "eminem concert", "price": 1000, "venue": "empty venue"}] |                 200
+       2 |       2 | {"city": "Berlin", "country": "DE", "currency": "EUR"}    | 13/01/2025 | 23/01/2025 | UK                      | {"temp": 10, "weather_type": "Cloudly"} | f            | {"amount": 2000, "currency": "EUR"} | f               |            2 | Capital of Germany     | {"best_places_to_visit": ["Tower", "City Center", "Museum"], "img_url_of_landmarks": ["", "", ""]} | [{"img": "", "date": "15/01/2025", "name": "eminem concert", "price": 1000, "venue": "empty venue"}] |                 200
+       3 |       1 | {"city": "Amsterdam", "country": "NL", "currency": "EUR"} | 26/01/2025 | 05/02/2025 | UK                      | {"temp": 15, "weather_type": "Sunny"}   | f            | {"amount": 2000, "currency": "EUR"} | t               |            1 | Capital of Netherlands | {"best_places_to_visit": ["Tower", "City Center", "Museum"], "img_url_of_landmarks": ["", "", ""]} | [{"img": "", "date": "15/01/2025", "name": "eminem concert", "price": 1000, "venue": "empty venue"}] |                 200
+(3 rows)
+
+ checklist_id | trip_id | user_id | items 
+--------------+---------+---------+-------
+(0 rows)
+
+ country | daily_cost_in_dollars 
+---------+-----------------------
+ UK      |                  2000
+ US      |                  1500
+ TR      |                  1000
+ DE      |                  1250
+(4 rows)
+

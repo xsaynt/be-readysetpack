@@ -6,9 +6,9 @@ import seed from './seed';
 import db from '../connection';
 
 const runSeed = () => {
-	// return seed({ usersData, tripsData, checklistData, costsData }).then(() =>
-	// 	db.end()
-	// );
+	 return seed({ usersData, tripsData, checklistData, costsData }).then(() =>
+	 	db.end()
+	 );
 };
 
 runSeed();

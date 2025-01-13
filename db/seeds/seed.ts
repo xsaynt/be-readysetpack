@@ -43,7 +43,7 @@ const seed = ({
                 );`);
 			const dailyCostTablePromise = db.query(`
                     CREATE TABLE dailyCost (
-                        country VARCHAR NOT NULL
+                        country VARCHAR NOT NULL,
                         daily_cost_in_dollars INT NOT NULL
                     )`);
 			return Promise.all([usersTablePromise, dailyCostTablePromise]);
