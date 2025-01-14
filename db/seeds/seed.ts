@@ -24,12 +24,12 @@ const seed = ({
 	checklistData: Checklist[];
 }) => {
 	return db
-		.query(`DROP TABLE IF EXISTS users`)
+		.query(`DROP TABLE IF EXISTS checklist`)
 		.then(() => {
 			return db.query('DROP TABLE IF EXISTS trips');
 		})
 		.then(() => {
-			return db.query('DROP TABLE IF EXISTS checklist');
+			return db.query('DROP TABLE IF EXISTS users');
 		})
 		.then(() => {
 			return db.query('DROP TABLE IF EXISTS dailyCost');

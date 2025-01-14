@@ -7,7 +7,7 @@ import db from '../connection';
 
 const runSeed = () => {
 	 return seed({ usersData, tripsData, checklistData, costsData }).then(() =>
-	 	db.end()
+	 	 db.end()
 	 );
 };
 

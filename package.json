@@ -6,8 +6,9 @@
 	"scripts": {
 		"test": "echo \"Error: no test specified\" && exit 1",
 		"setup-dbs": "psql -f ./db/setup.sql",
-		"seed": "ts-node -r ./db/seeds/run-seed.ts",
-		"scratch": "psql -f scratch.sql > scratch.txt"
+		"seed": "ts-node ./db/seeds/run-seed.ts",
+		"scratch": "psql -f scratch.sql > scratch.txt",
+		"start": "nodemon listen.ts"
 	},
 	"keywords": [],
 	"author": "",

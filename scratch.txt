@@ -15,9 +15,12 @@ You are now connected to database "ready_set_pack" as user "onuryilmaz24".
        3 |       1 | {"city": "Amsterdam", "country": "NL", "currency": "EUR"} | 26/01/2025 | 05/02/2025 | UK                      | {"temp": 15, "weather_type": "Sunny"}   | f            | {"amount": 2000, "currency": "EUR"} | t               |            1 | Capital of Netherlands | {"best_places_to_visit": ["Tower", "City Center", "Museum"], "img_url_of_landmarks": ["", "", ""]} | [{"img": "", "date": "15/01/2025", "name": "eminem concert", "price": 1000, "venue": "empty venue"}] |                 200
 (3 rows)
 
- checklist_id | trip_id | user_id | items 
---------------+---------+---------+-------
-(0 rows)
+ checklist_id | trip_id | user_id |                         items                         
+--------------+---------+---------+-------------------------------------------------------
+            1 |       1 |       1 | ["shirt", "trousers", "toiletries", "hats", "laptop"]
+            2 |       2 |       2 | ["shirt", "trousers", "toiletries", "hats"]
+            3 |       3 |       1 | ["shirt", "trousers", "hats", "laptop"]
+(3 rows)
 
  country | daily_cost_in_dollars 
 ---------+-----------------------

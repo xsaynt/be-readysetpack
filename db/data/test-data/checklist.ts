@@ -13,14 +13,10 @@ const checklistData: Checklist[] = [
 	},
 	{
 		trip_id: 3,
-		user_id: 3,
+		user_id: 1,
 		items: ['shirt', 'trousers', 'hats', 'laptop'],
 	},
-	{
-		trip_id: 4,
-		user_id: 4,
-		items: ['shirt', 'trousers', 'toiletries'],
-	},
+	
 ];
 
 export default checklistData;
