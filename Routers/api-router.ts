@@ -1,10 +1,9 @@
 import express from 'express'
+import homeController from '../Controllers/homecontroller'
 
 const apiRouter = express.Router()
 
-apiRouter.get("/",(req,res,next)=>{
-    res.send("Hello from test endpoint")
-})
+apiRouter.get("/",homeController)
 
 
 
