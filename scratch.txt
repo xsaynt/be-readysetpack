@@ -1,4 +1,4 @@
-You are now connected to database "ready_set_pack" as user "onuryilmaz24".
+You are now connected to database "ready_set_pack" as user "aprice".
  user_id |  username  |  name   
 ---------+------------+---------
        1 | alex123    | alex
