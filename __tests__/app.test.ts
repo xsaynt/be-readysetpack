@@ -223,3 +223,17 @@ describe('POST api/users', () => {
 		});
 	});
 });
+
+describe('GET /api/dailyCost/:country', () => {
+	test('200: Responds with correct daily cost based on input destination', () => {
+		return request(app)
+			.get('/api/dailyCost/UK')
+			.expect(200)
+			.then(({ body: { countryInfo } }) => {
+				expect(countryInfo).toEqual({
+					country: 'UK',
+					daily_cost_in_dollars: 2000,
+				});
+			});
+	});
+});
