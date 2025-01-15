@@ -5,8 +5,9 @@ import {
 	postgresErrorHandler,
 	serverErrorHandler,
 } from './error';
-
 const app = express();
+
+app.use(express.json());
 
 app.use('/api', apiRouter);
 
