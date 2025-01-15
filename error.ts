@@ -2,10 +2,12 @@ import { Request, Response, NextFunction } from 'express';
 
 class AppError extends Error {
 	statusCode: number;
+	code: string;
 
-	constructor(message: string, statusCode: number) {
+	constructor(message: string, statusCode: number, code:string) {
 		super(message);
 		this.statusCode = statusCode;
+		this.code = code
 		Object.setPrototypeOf(this, new.target.prototype);
 	}
 }
@@ -29,12 +31,12 @@ export const postgresErrorHandler = (
 	res: Response,
 	next: NextFunction
 ) => {
-	if (err.name === '22P02') {
+	if (err.code === '22P02') {
 		res.status(400).send({ msg: 'bad request' });
 	} else if (
-		err.name === '23503' ||
-		err.name === '42703' ||
-		err.name === '42601'
+		err.code === '23503' ||
+		err.code === '42703' ||
+		err.code === '42601'
 	) {
 		res.status(404).send({ msg: 'not found' });
 	} else {
@@ -48,6 +50,5 @@ export const serverErrorHandler = (
 	res: Response,
 	next: NextFunction
 ) => {
-	console.log('Error:', err);
 	res.status(500).send({ msg: 'Internal Server Error' });
 };

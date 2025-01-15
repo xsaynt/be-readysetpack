@@ -1,5 +1,19 @@
 {
-    "GET /api": {
+  "GET /api": {
     "description": "Serves up a json representation of all the available endpoints of the api ready set pack."
+  },
+  "GET /api/users": {
+    "description": "Provides all users data.",
+    "queries": [],
+    "Example Response": {
+      "users": [{ "user_id": 1, "username": "alex123", "name": "alex" }]
+    }
+  },
+  "GET /api/users/:user_id": {
+    "description": "Provides individual user data.",
+    "queries": [],
+    "Example Response": {
+      "user": { "user_id": 1, "username": "alex123", "name": "alex" }
+    }
   }
 }
