@@ -15,7 +15,7 @@ const tripsData: Trips[] = [
 			temp: 20,
 			weather_type: 'Sunny',
 		},
-		is_need_visa: false,
+		visa_type: "eVisa",
 		budget: {
 			amount: 2000,
 			currency: 'EUR',
@@ -52,7 +52,7 @@ const tripsData: Trips[] = [
 			temp: 10,
 			weather_type: 'Cloudly',
 		},
-		is_need_visa: false,
+		visa_type: "eVisa",
 		budget: {
 			amount: 2000,
 			currency: 'EUR',
@@ -89,7 +89,7 @@ const tripsData: Trips[] = [
 			temp: 15,
 			weather_type: 'Sunny',
 		},
-		is_need_visa: false,
+		visa_type: "eVisa",
 		budget: {
 			amount: 2000,
 			currency: 'EUR',

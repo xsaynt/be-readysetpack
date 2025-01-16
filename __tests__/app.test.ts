@@ -7,7 +7,7 @@ import usersData from "../db/data/test-data/users";
 import tripsData from "../db/data/test-data/trips";
 import costsData from "../db/data/test-data/dailycost";
 import endpointsJson from "../endpoints.json";
-import { Users } from "../types/types";
+import { Trips, Users } from "../types/types";
 import { Response } from "supertest";
 
 afterAll(() => {
@@ -288,5 +288,36 @@ describe("GET /api/dailyCost/:country", () => {
       .then((response: Response) => {
         expect(response.body.msg).toBe("Does Not Found");
       });
+  });
+
+  describe.only("GET /api/trips/:user_id", () => {
+    test("200: Responds with all trips for user ", () => {
+      return request(app)
+        .get("/api/trips/1")
+        .expect(200)
+        .then(({ body: { trips } }: { body: { trips: Trips[] } }) => {
+          expect(trips).toHaveLength(2);
+          trips.forEach((trip: Trips) => {
+            expect(trip).toEqual(
+              expect.objectContaining({
+                trip_id: expect.any(Number),
+                user_id: expect.any(Number),
+				destination: expect.objectContaining({
+					city:expect.any(String),
+					country:expect.any(String),
+					currency:expect.any(String)
+				}),
+                start_date: expect.any(String),
+                end_date: expect.any(String),
+				passport_issued_country: expect.any(String),
+				weather:expect.objectContaining({
+					temp:expect.any(Number),
+					weather_type:expect.any(String)
+				}),
+              })
+            );
+          });
+        });
+    });
   });
 });

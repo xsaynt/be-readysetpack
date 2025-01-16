@@ -13,7 +13,7 @@ type Trips = {
 	end_date: string;
 	passport_issued_country: string;
 	weather: Weather;
-	is_need_visa: boolean;
+	visa_type: string;
 	budget: Budget;
 	is_booked_hotel: boolean;
 	people_count: number;
