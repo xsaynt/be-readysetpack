@@ -32,13 +32,13 @@ export const postgresErrorHandler = (
 	next: NextFunction
 ) => {
 	if (err.code === '22P02') {
-		res.status(400).send({ msg: 'bad request' });
+		res.status(400).send({ msg: 'Bad Request' });
 	} else if (
 		err.code === '23503' ||
 		err.code === '42703' ||
 		err.code === '42601'
 	) {
-		res.status(404).send({ msg: 'not found' });
+		res.status(404).send({ msg: 'Not Found' });
 	} else {
 		next(err);
 	}

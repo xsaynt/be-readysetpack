@@ -6,6 +6,6 @@ export const checkExist = async(table:string,column:string,value:any) =>{
     const dbOutput = await db.query(queryStr,[value]);
 
     if(dbOutput.rows.length === 0 ){
-        return Promise.reject({statusCode: 404, message: "Not Found"})
+        return Promise.reject({statusCode: 404, message: "Does Not Found"})
     }
 }

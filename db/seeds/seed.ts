@@ -32,7 +32,7 @@ const seed = ({
 			return db.query('DROP TABLE IF EXISTS users');
 		})
 		.then(() => {
-			return db.query('DROP TABLE IF EXISTS dailyCost');
+			return db.query('DROP TABLE IF EXISTS dailycost');
 		})
 		.then(() => {
 			const usersTablePromise = db.query(`
@@ -42,7 +42,7 @@ const seed = ({
                     name VARCHAR NOT NULL
                 );`);
 			const dailyCostTablePromise = db.query(`
-                    CREATE TABLE dailyCost (
+                    CREATE TABLE dailycost (
                         country VARCHAR NOT NULL,
                         daily_cost_in_dollars INT NOT NULL
                     )`);
@@ -99,7 +99,7 @@ const seed = ({
 			]);
 			const insertDailyCostQueryStr = format(
 				`
-                    INSERT INTO dailyCost(country, daily_cost_in_dollars)
+                    INSERT INTO dailycost(country, daily_cost_in_dollars)
                     Values %L;
                 `,
 				costValues

@@ -1,19 +1,60 @@
 {
-	"GET /api": {
-		"description": "Serves up a json representation of all the available endpoints of the api ready set pack."
-	},
-	"GET /api/users": {
-		"description": "Provides all users data.",
-		"queries": [],
-		"Example Response": {
-			"users": [{ "user_id": 1, "username": "alex123", "name": "alex" }]
-		}
-	},
-	"GET /api/users/:user_id": {
-		"description": "Provides individual user data.",
-		"queries": [],
-		"Example Response": {
-			"user": { "user_id": 1, "username": "alex123", "name": "alex" }
-		}
-	}
+  "GET /api": {
+    "description": "Serves up a json representation of all the available endpoints of the api ready set pack."
+  },
+  "GET /api/users": {
+    "description": "Provides all users data.",
+    "queries": [],
+    "Example Response": {
+      "users": [{ "user_id": 1, "username": "alex123", "name": "alex" }]
+    }
+  },
+  "GET /api/users/:user_id": {
+    "description": "Provides individual user data.",
+    "queries": [],
+    "Example Response": {
+      "user": { "user_id": 1, "username": "alex123", "name": "alex" }
+    }
+  },
+  "POST /api/users": {
+    "description": "Create new user by username and name",
+    "queries": [],
+    "Example Body": {
+      "username": "alex123",
+      "name": "alex"
+    },
+    "Example Response": {
+      "user": { "user_id": 6, "username": "alex123", "name": "alex" }
+    }
+  },
+  "PATCH /api/users/:user_id": {
+    "description": "Changes Data for selected user by username or name",
+    "queries": [],
+    "Example Body": {
+      "username": "alex_new",
+      "name": "alex new"
+    },
+    "Example Body for username": {
+      "username": "alex_new"
+    },
+    "Example Body for name": {
+      "name": "alex new"
+    },
+    "Example Response": {
+      "user": { "user_id": 1, "username": "alex_new", "name": "alex new" }
+    }
+  },
+  "DELETE /api/users/:user_id": {
+    "description": "Deletes user from database",
+    "queries": [],
+    "Example Response": {}
+  },
+
+  "GET /api/dailyCost/:country": {
+    "description": "Provides daily cost data for individual country.",
+    "queries": [],
+    "Example Response": {
+      "users": [{ "country": "UK", "daily_cost_in_dollar": 2000 }]
+    }
+  }
 }
