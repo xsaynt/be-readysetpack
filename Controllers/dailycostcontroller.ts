@@ -23,7 +23,6 @@ export const getDailyCost = (
       res.status(200).send({ countryInfo });
     })
     .catch((err) => {
-      console.log(err);
       next(err);
     });
 };

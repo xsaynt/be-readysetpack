@@ -290,34 +290,206 @@ describe("GET /api/dailyCost/:country", () => {
       });
   });
 
-  describe.only("GET /api/trips/:user_id", () => {
-    test("200: Responds with all trips for user ", () => {
-      return request(app)
-        .get("/api/trips/1")
-        .expect(200)
-        .then(({ body: { trips } }: { body: { trips: Trips[] } }) => {
-          expect(trips).toHaveLength(2);
-          trips.forEach((trip: Trips) => {
-            expect(trip).toEqual(
-              expect.objectContaining({
-                trip_id: expect.any(Number),
-                user_id: expect.any(Number),
-				destination: expect.objectContaining({
-					city:expect.any(String),
-					country:expect.any(String),
-					currency:expect.any(String)
+  
+});
+
+describe("GET /api/trips/:user_id", () => {
+  test("200: Responds with all trips for user ", () => {
+	return request(app)
+	  .get("/api/trips/1")
+	  .expect(200)
+	  .then(({ body: { trips } }: { body: { trips: Trips[] } }) => {
+		expect(trips).toHaveLength(2);
+		trips.forEach((trip: Trips) => {
+		  expect(trip).toEqual(
+			expect.objectContaining({
+			  trip_id: expect.any(Number),
+			  user_id: expect.any(Number),
+			  destination: expect.objectContaining({
+				city: expect.any(String),
+				country: expect.any(String),
+				currency: expect.any(String),
+			  }),
+			  start_date: expect.any(String),
+			  end_date: expect.any(String),
+			  passport_issued_country: expect.any(String),
+			  weather: expect.objectContaining({
+				temp: expect.any(Number),
+				weather_type: expect.any(String),
+			  }),
+			  visa_type: expect.any(String),
+			  budget: expect.objectContaining({
+				amount: expect.any(Number),
+				currency: expect.any(String),
+			  }),
+			  is_booked_hotel: expect.any(Boolean),
+			  people_count: expect.any(Number),
+			  city_information: expect.any(String),
+			  landmarks: expect.objectContaining({
+				best_places_to_visit: expect.any(Object),
+				img_url_of_landmarks: expect.any(Object),
+			  }),
+			  events: expect.arrayContaining([
+				expect.objectContaining({
+				  img: expect.any(String),
+				  date: expect.any(String),
+				  name: expect.any(String),
+				  price: expect.any(Number),
+				  venue: expect.any(String),
 				}),
-                start_date: expect.any(String),
-                end_date: expect.any(String),
-				passport_issued_country: expect.any(String),
-				weather:expect.objectContaining({
-					temp:expect.any(Number),
-					weather_type:expect.any(String)
-				}),
-              })
-            );
-          });
-        });
-    });
+			  ]),
+			  daily_expected_cost: expect.any(Number),
+			})
+		  );
+		});
+	  });
+  });
+  test("200: Responds with an empty array when user does not have any trip ", () => {
+	return request(app)
+	  .get("/api/trips/3")
+	  .expect(200)
+	  .then(({ body: { trips } }: { body: { trips: Trips[] } }) => {
+		expect(trips).toHaveLength(0);
+	  });
+  });
+
+  test("404: Should responds with an error message when user does not exist", () => {
+	return request(app)
+	  .get("/api/trips/10")
+	  .expect(404)
+	  .then((response: Response) => {
+		expect(response.body.msg).toBe("Does Not Found");
+	  });
+  });
+});
+describe("POST /api/trips/:user_id", () => {
+  test("201: Should post a new trip for user ", () => {
+	const tripData = {
+	  destination: {
+		city: "Amsterdam",
+		country: "NE",
+		currency: "EUR",
+	  },
+	  start_date: "25/01/2025",
+	  end_date: "15/02/2025",
+	  passport_issued_country: "UK",
+	  weather: {
+		temp: 25,
+		weather_type: "Cloudly",
+	  },
+	  visa_type: "eVisa",
+	  budget: {
+		amount: 1000,
+		currency: "EUR",
+	  },
+	  is_booked_hotel: false,
+	  people_count: 1,
+	  city_information: "Capital of Netherlands",
+	  landmarks: {
+		best_places_to_visit: ["Tower", "City Center", "Museum"],
+		img_url_of_landmarks: ["", "", ""],
+	  },
+	  events: [
+		{
+		  name: "eminem concert",
+		  venue: "empty venue",
+		  date: "15/01/2025",
+		  img: "",
+		  price: 1000,
+		},
+	  ],
+	  daily_expected_cost: 200,
+	};
+	return request(app)
+	  .post("/api/trips/2")
+	  .send(tripData)
+	  .expect(201)
+	  .then(({ body: { trip} }: { body: { trip: Trips[] } }) => {
+			  expect(trip).toEqual(
+				expect.objectContaining({
+				  trip_id: expect.any(Number),
+				  user_id: expect.any(Number),
+				  destination: expect.objectContaining({
+					city: expect.any(String),
+					country: expect.any(String),
+					currency: expect.any(String),
+				  }),
+				  start_date: expect.any(String),
+				  end_date: expect.any(String),
+				  passport_issued_country: expect.any(String),
+				  weather: expect.objectContaining({
+					temp: expect.any(Number),
+					weather_type: expect.any(String),
+				  }),
+				  visa_type: expect.any(String),
+				  budget: expect.objectContaining({
+					amount: expect.any(Number),
+					currency: expect.any(String),
+				  }),
+				  is_booked_hotel: expect.any(Boolean),
+				  people_count: expect.any(Number),
+				  city_information: expect.any(String),
+				  landmarks: expect.objectContaining({
+					best_places_to_visit: expect.any(Object),
+					img_url_of_landmarks: expect.any(Object),
+				  }),
+				  events: expect.arrayContaining([
+					expect.objectContaining({
+					  img: expect.any(String),
+					  date: expect.any(String),
+					  name: expect.any(String),
+					  price: expect.any(Number),
+					  venue: expect.any(String),
+					}),
+				  ]),
+				  daily_expected_cost: expect.any(Number),
+				})
+			  );
+	  });
+  });
+  test('404: Responds with error message when user does not exist', () => {
+	const tripData = {
+		destination: {
+		  city: "Amsterdam",
+		  country: "NE",
+		  currency: "EUR",
+		},
+		start_date: "25/01/2025",
+		end_date: "15/02/2025",
+		passport_issued_country: "UK",
+		weather: {
+		  temp: 25,
+		  weather_type: "Cloudly",
+		},
+		visa_type: "eVisa",
+		budget: {
+		  amount: 1000,
+		  currency: "EUR",
+		},
+		is_booked_hotel: false,
+		people_count: 1,
+		city_information: "Capital of Netherlands",
+		landmarks: {
+		  best_places_to_visit: ["Tower", "City Center", "Museum"],
+		  img_url_of_landmarks: ["", "", ""],
+		},
+		events: [
+		  {
+			name: "eminem concert",
+			venue: "empty venue",
+			date: "15/01/2025",
+			img: "",
+			price: 1000,
+		  },
+		],
+		daily_expected_cost: 200,
+	  };
+	return request(app)
+	.post("/api/trips/10")
+	.send(tripData)
+	.expect(404)
+	.then((response: Response) => {
+	  expect(response.body.msg).toBe("Does Not Found");
+	});
   });
 });
