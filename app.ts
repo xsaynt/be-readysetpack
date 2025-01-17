@@ -1,4 +1,5 @@
 import express from 'express';
+import cors from 'cors';
 import apiRouter from './Routers/api-router';
 import {
 	customErrorHandler,
@@ -7,7 +8,7 @@ import {
 } from './error';
 const app = express();
 
-app.use(express.json());
+app.use(express.json(), cors());
 
 app.use('/api', apiRouter);
 
