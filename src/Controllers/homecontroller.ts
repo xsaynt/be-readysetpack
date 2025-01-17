@@ -1,4 +1,4 @@
-import endpointsJson from "../endpoints.json"
+import endpointsJson from "../../endpoints.json"
 import { Request,Response,NextFunction } from "express"
 
 const homeController = (req:Request,res:Response,next:NextFunction) =>{

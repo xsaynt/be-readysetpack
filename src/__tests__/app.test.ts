@@ -6,7 +6,7 @@ import checklistData from '../db/data/test-data/checklist';
 import usersData from '../db/data/test-data/users';
 import tripsData from '../db/data/test-data/trips';
 import costsData from '../db/data/test-data/dailycost';
-import endpointsJson from '../endpoints.json';
+import endpointsJson from '../../endpoints.json';
 import { Trips, Users, Checklist } from '../types/types';
 import { Response } from 'supertest';
 
