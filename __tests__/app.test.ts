@@ -54,9 +54,9 @@ describe("GET /api/users", () => {
         .get("/api/usersllalalala")
         .expect(404)
         //remove 'any' type from .then
-        .then((response: any) => {
-          expect(response.res.statusMessage).toBe("Not Found");
-        })
+        .then((response: Response) => {
+          expect(response.body.msg).toBe("Does Not Found");
+        });
     );
   });
 });
