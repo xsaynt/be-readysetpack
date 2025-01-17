@@ -5,8 +5,8 @@
 	"main": "listen.js",
 	"scripts": {
 		"test": "jest",
-		"setup-dbs": "psql -f ./db/setup.sql",
-		"seed": "ts-node ./db/seeds/run-seed.ts",
+		"setup-dbs": "psql -f ./src/db/setup.sql",
+		"seed": "ts-node ./src/db/seeds/run-seed.ts",
 		"scratch": "psql -f scratch.sql > scratch.txt",
 		"start": "node ./dist/listen.js",
 		"seed-prod": "NODE_ENV=production npm run seed",
