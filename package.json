@@ -2,13 +2,14 @@
 	"name": "be-readysetpack",
 	"version": "1.0.0",
 	"description": "Backend repo for project Ready Set Pack",
-	"main": "index.js",
+	"main": "listen.ts",
 	"scripts": {
 		"test": "jest",
 		"setup-dbs": "psql -f ./db/setup.sql",
 		"seed": "ts-node ./db/seeds/run-seed.ts",
 		"scratch": "psql -f scratch.sql > scratch.txt",
-		"start": "nodemon listen.ts"
+		"start": "node listen.ts",
+		"seed-prod":"NODE_ENV=production npm run seed"
 	},
 	"keywords": [],
 	"author": "",

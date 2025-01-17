@@ -53,9 +53,8 @@ describe('GET /api/users', () => {
 			request(app)
 				.get('/api/usersllalalala')
 				.expect(404)
-				//remove 'any' type from .then
-				.then((response: Response) => {
-					expect(response.body.msg).toBe('Does Not Found');
+				.then((response: any) => {
+					expect(response.res.statusMessage).toBe('Not Found');
 				})
 		);
 	});
