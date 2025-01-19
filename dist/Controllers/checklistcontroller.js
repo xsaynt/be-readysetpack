@@ -29,7 +29,7 @@ const postChecklist = (req, res, next) => {
     const trip_id = Number(req.params.trip_id);
     const postBody = req.body;
     const promises = [
-        (0, checklistmodel_1.addChecklist)(user_id, trip_id, postBody),
+        (0, checklistmodel_1.addChecklist)(user_id, trip_id),
     ];
     if (user_id) {
         promises.push((0, api_utils_1.checkExist)("users", "user_id", user_id));
