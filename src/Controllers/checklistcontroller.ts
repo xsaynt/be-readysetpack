@@ -47,7 +47,7 @@ export const postChecklist = (
   const postBody: any = req.body;
 
   const promises: Promise<Checklist[] | void>[] = [
-    addChecklist(user_id, trip_id, postBody),
+    addChecklist(user_id, trip_id),
   ];
 
   if (user_id) {

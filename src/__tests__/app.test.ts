@@ -743,13 +743,8 @@ describe("GET /api/checklists/:user_id/:trip_id", () => {
 
 describe("POST /api/checklists/:user_id/:trip_id", () => {
   test("201: Posts checklist to the checklist table ", () => {
-    const inputChecklist = {
-      items: ["Laptop", "Clothes", "Shoes"],
-    };
-
     return request(app)
       .post("/api/checklists/1/1")
-      .send(inputChecklist)
       .expect(201)
       .then(({ body: { checklist } }: { body: { checklist: Checklist } }) => {
         expect(checklist).toEqual(
@@ -763,26 +758,16 @@ describe("POST /api/checklists/:user_id/:trip_id", () => {
       });
   });
   test("404: Returns an error when passed incorrect/not exist user id", () => {
-    const inputChecklist = {
-      items: ["Laptop", "Clothes", "Shoes"],
-    };
-
     return request(app)
       .post("/api/checklists/10/1")
-      .send(inputChecklist)
       .expect(404)
       .then((response: Response) => {
         expect(response.body.msg).toBe("Does Not Found");
       });
   });
   test("404: Returns an error when passed incorrect/not exist trip id", () => {
-    const inputChecklist = {
-      items: ["Laptop", "Clothes", "Shoes"],
-    };
-
     return request(app)
       .post("/api/checklists/1/10")
-      .send(inputChecklist)
       .expect(404)
       .then((response: Response) => {
         expect(response.body.msg).toBe("Does Not Found");
@@ -790,26 +775,16 @@ describe("POST /api/checklists/:user_id/:trip_id", () => {
   });
 
   test("400: Returns an error when passed user_id as a string", () => {
-    const inputChecklist = {
-      items: ["Laptop", "Clothes", "Shoes"],
-    };
-
     return request(app)
       .post("/api/checklists/abc/1")
-      .send(inputChecklist)
       .expect(400)
       .then((response: Response) => {
         expect(response.body.msg).toBe("Bad Request");
       });
   });
   test("400: Returns an error when passed trip_id as a string", () => {
-    const inputChecklist = {
-      items: ["Laptop", "Clothes", "Shoes"],
-    };
-
     return request(app)
       .post("/api/checklists/1/abc")
-      .send(inputChecklist)
       .expect(400)
       .then((response: Response) => {
         expect(response.body.msg).toBe("Bad Request");
@@ -830,11 +805,14 @@ describe("PATCH /api/checklists/:user_id/:trip_id/", () => {
           trip_id: 1,
           user_id: 1,
           items: [
-            "shirt",
-            "trousers",
-            "toiletries",
-            "hats",
-            "laptop",
+            "Check your passport",
+            "Print or download your tickets (flight/train/bus).",
+            "Pack comfortable T-shirts/tops.",
+            "Dont forget your pants/shorts/skirts.",
+            "Pack comfortable shoes for walking.",
+            "Pack your toothbrush and toothpaste.",
+            "Bring your phone charger.",
+            "Pack a power bank for emergencies.",
             "new item",
           ],
         });
@@ -884,7 +862,7 @@ describe("PATCH /api/checklists/:user_id/:trip_id/", () => {
 
 describe("PATCH /api/checklists/:user_id/:trip_id/delete-item (Deleting single item from items array)", () => {
   test("200: Should delete single item from items array ", () => {
-    const deleteChecklistItem = { item: "shirt" };
+    const deleteChecklistItem = { item: "Check your passport" };
     return request(app)
       .patch("/api/checklists/1/1/delete-item")
       .send(deleteChecklistItem)
@@ -894,8 +872,48 @@ describe("PATCH /api/checklists/:user_id/:trip_id/delete-item (Deleting single i
           checklist_id: 1,
           trip_id: 1,
           user_id: 1,
-          items: ["trousers", "toiletries", "hats", "laptop"],
+          items: ["Print or download your tickets (flight/train/bus).","Pack comfortable T-shirts/tops.","Dont forget your pants/shorts/skirts.","Pack comfortable shoes for walking.","Pack your toothbrush and toothpaste.","Bring your phone charger.","Pack a power bank for emergencies."],
         });
+      });
+  });
+  test("404: Should return an error msg if user id does not exist ", () => {
+    const deleteChecklistItem = { item: "Check your passport" };
+    return request(app)
+      .patch("/api/checklists/10/1")
+      .send(deleteChecklistItem)
+      .expect(404)
+      .then((response: Response) => {
+        expect(response.body.msg).toBe("Does Not Found");
+      });
+  });
+  test("404: Should return an error msg if trip id does not exist ", () => {
+    const deleteChecklistItem = { item: "Check your passport" };
+    return request(app)
+      .patch("/api/checklists/1/10")
+      .send(deleteChecklistItem)
+      .expect(404)
+      .then((response: Response) => {
+        expect(response.body.msg).toBe("Does Not Found");
+      });
+  });
+  test("400: Should return an error msg if user id is string ", () => {
+    const deleteChecklistItem = { item: "Check your passport" };
+    return request(app)
+      .patch("/api/checklists/abc/1")
+      .send(deleteChecklistItem)
+      .expect(400)
+      .then((response: Response) => {
+        expect(response.body.msg).toBe("Bad Request");
+      });
+  });
+  test("400: Should return an error msg if trip id is string ", () => {
+    const deleteChecklistItem = { item: "Check your passport" };
+    return request(app)
+      .patch("/api/checklists/1/abc")
+      .send(deleteChecklistItem)
+      .expect(400)
+      .then((response: Response) => {
+        expect(response.body.msg).toBe("Bad Request");
       });
   });
 });
@@ -903,5 +921,37 @@ describe("PATCH /api/checklists/:user_id/:trip_id/delete-item (Deleting single i
 describe("DELETE /api/checklists/:user_id/:trip_id", () => {
   test("204: Should delete entire checklist  ", () => {
     return request(app).delete("/api/checklists/1/1").expect(204);
+  });
+  test("404: Should return an error msg if user id does not exist ", () => {
+    return request(app)
+      .delete("/api/checklists/10/1")
+      .expect(404)
+      .then((response: Response) => {
+        expect(response.body.msg).toBe("Does Not Found");
+      });
+  });
+  test("404: Should return an error msg if trip id does not exist ", () => {
+    return request(app)
+      .delete("/api/checklists/1/10")
+      .expect(404)
+      .then((response: Response) => {
+        expect(response.body.msg).toBe("Does Not Found");
+      });
+  });
+  test("400: Should return an error msg if user id is string ", () => {
+    return request(app)
+      .delete("/api/checklists/abc/1")
+      .expect(400)
+      .then((response: Response) => {
+        expect(response.body.msg).toBe("Bad Request");
+      });
+  });
+  test("400: Should return an error msg if trip id is string ", () => {
+    return request(app)
+      .delete("/api/checklists/1/abc")
+      .expect(400)
+      .then((response: Response) => {
+        expect(response.body.msg).toBe("Bad Request");
+      });
   });
 });

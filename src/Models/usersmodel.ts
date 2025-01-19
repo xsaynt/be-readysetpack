@@ -49,8 +49,9 @@ export const addUser = (postBody: Users) => {
 };
 
 export const updateUser = (user_id: number, postBody: Users) => {
-	const { username, name } = postBody;
-	const values = [];
+	const { name } = postBody;
+	const values = Object.values(postBody);
+	const updateFields = Object.keys(postBody)
 
 	const validColumns = ['username', 'name'];
 	if (!Object.keys(postBody).every((key) => validColumns.includes(key))) {
@@ -63,7 +64,26 @@ export const updateUser = (user_id: number, postBody: Users) => {
 		return Promise.reject({ statusCode: 400, message: 'Bad Request' });
 	}
 
-	let updateQuery: string = 'UPDATE users SET';
+	
+	const setClause = updateFields.map((field,index)=>{
+		return `${field} = $${index + 1}`;
+	}).join(`, `)
+
+	values.push(Number(user_id));
+
+	const updateQuery:string = `
+    UPDATE users
+    SET ${setClause}
+    WHERE user_id = $${values.length}
+    RETURNING *;
+  `;
+
+	return db.query(updateQuery, values).then(({ rows }) => {
+		return rows[0];
+	});
+};
+
+/* let updateQuery: string = 'UPDATE users SET';
 
 	if (username && !name) {
 		values.push(username);
@@ -80,12 +100,4 @@ export const updateUser = (user_id: number, postBody: Users) => {
 		values.push(name);
 		updateQuery += ` username = $1 , name = $2`;
 	}
-
-	values.push(user_id);
-
-	updateQuery += ` WHERE user_id = $${values.length} RETURNING *;`;
-
-	return db.query(updateQuery, values).then(({ rows }) => {
-		return rows[0];
-	});
-};
+ */
