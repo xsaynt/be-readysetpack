@@ -2,21 +2,21 @@
   "GET /api": {
     "description": "Serves up a json representation of all the available endpoints of the api ready set pack."
   },
-  "GET /api/users": {
+  "1 - GET /api/users": {
     "description": "Provides all users data.",
     "queries": [],
     "Example Response": {
       "users": [{ "user_id": 1, "username": "alex123", "name": "alex" }]
     }
   },
-  "GET /api/users/:user_id": {
+  "2 - GET /api/users/:user_id": {
     "description": "Provides individual user data.",
     "queries": [],
     "Example Response": {
       "user": { "user_id": 1, "username": "alex123", "name": "alex" }
     }
   },
-  "POST /api/users": {
+  "3 - POST /api/users": {
     "description": "Create new user by username and name",
     "queries": [],
     "Example Body": {
@@ -27,7 +27,7 @@
       "user": { "user_id": 6, "username": "alex123", "name": "alex" }
     }
   },
-  "PATCH /api/users/:user_id": {
+  "4 - PATCH /api/users/:user_id": {
     "description": "Changes Data for selected user by username or name",
     "queries": [],
     "Example Body": {
@@ -44,17 +44,280 @@
       "user": { "user_id": 1, "username": "alex_new", "name": "alex new" }
     }
   },
-  "DELETE /api/users/:user_id": {
+  "5 - DELETE /api/users/:user_id": {
     "description": "Deletes user from database",
     "queries": [],
     "Example Response": {}
   },
 
-  "GET /api/dailyCost/:country": {
+  "6 - GET /api/dailyCost/:country": {
     "description": "Provides daily cost data for individual country.",
     "queries": [],
     "Example Response": {
       "users": [{ "country": "UK", "daily_cost_in_dollar": 2000 }]
     }
+  },
+  "7 - GET /api/trips/:user_id": {
+    "description": "Responds with all trips data for user. (Default DESC order by  trip_id)",
+    "queries": ["order", "sort_by"],
+    "order": ["ASC", "DESC"],
+    "sort_by": ["trip_id"],
+    "Example Response": {
+      "trips": [
+        {
+          "trip_id": 3,
+          "user_id": 1,
+          "destination": {
+            "city": "Amsterdam",
+            "country": "NL",
+            "currency": "EUR"
+          },
+          "start_date": "26/01/2025",
+          "end_date": "05/02/2025",
+          "passport_issued_country": "UK",
+          "weather": { "temp": 15, "weather_type": "Sunny" },
+          "visa_type": "eVisa",
+          "budget": { "amount": 2000, "currency": "EUR" },
+          "is_booked_hotel": true,
+          "people_count": 1,
+          "city_information": "Capital of Netherlands",
+          "landmarks": {
+            "best_places_to_visit": ["Tower", "City Center", "Museum"],
+            "img_url_of_landmarks": ["", "", ""]
+          },
+          "events": [
+            {
+              "img": "",
+              "date": "15/01/2025",
+              "name": "eminem concert",
+              "price": 1000,
+              "venue": "empty venue"
+            }
+          ],
+          "daily_expected_cost": 200
+        }
+      ]
+    }
+  },
+  "8 - POST /api/trips/:user_id": {
+    "description": "Posts new trip",
+    "example_post_body": {
+      "destination": {
+        "city": "Amsterdam",
+        "country": "NL",
+        "currency": "EUR"
+      },
+      "start_date": "26/01/2025",
+      "end_date": "05/02/2025",
+      "passport_issued_country": "UK",
+      "weather": { "temp": 15, "weather_type": "Sunny" },
+      "visa_type": "eVisa",
+      "budget": { "amount": 2000, "currency": "EUR" },
+      "is_booked_hotel": true,
+      "people_count": 1,
+      "city_information": "Capital of Netherlands",
+      "landmarks": {
+        "best_places_to_visit": ["Tower", "City Center", "Museum"],
+        "img_url_of_landmarks": ["", "", ""]
+      },
+      "events": [
+        {
+          "img": "",
+          "date": "15/01/2025",
+          "name": "eminem concert",
+          "price": 1000,
+          "venue": "empty venue"
+        }
+      ],
+      "daily_expected_cost": 200
+    },
+    "Example Response": {
+      "trips": [
+        {
+          "trip_id": 4,
+          "user_id": 1,
+          "destination": {
+            "city": "Amsterdam",
+            "country": "NL",
+            "currency": "EUR"
+          },
+          "start_date": "26/01/2025",
+          "end_date": "05/02/2025",
+          "passport_issued_country": "UK",
+          "weather": { "temp": 15, "weather_type": "Sunny" },
+          "visa_type": "eVisa",
+          "budget": { "amount": 2000, "currency": "EUR" },
+          "is_booked_hotel": true,
+          "people_count": 1,
+          "city_information": "Capital of Netherlands",
+          "landmarks": {
+            "best_places_to_visit": ["Tower", "City Center", "Museum"],
+            "img_url_of_landmarks": ["", "", ""]
+          },
+          "events": [
+            {
+              "img": "",
+              "date": "15/01/2025",
+              "name": "eminem concert",
+              "price": 1000,
+              "venue": "empty venue"
+            }
+          ],
+          "daily_expected_cost": 200
+        }
+      ]
+    }
+  },
+  "9 - PATCH /api/trips/:user_id/:trip_id": {
+    "description": "Patches trip by user_id and trip_id for certain columns",
+    "Patch Columns": [
+      "start_date",
+      "end_date",
+      "budget",
+      "is_booked_hotel",
+      "people_count"
+    ],
+    "Example Patch Body": {
+      "start_date": "10/02/2025",
+      "end_date": "05/03/2025",
+      "budget": {
+        "amount": 1500,
+        "currency": "GBP"
+      },
+      "is_booked_hotel": true,
+      "people_count": 3
+    },
+    "Example Response": {
+      "trips": [
+        {
+          "trip_id": 3,
+          "user_id": 1,
+          "destination": {
+            "city": "Amsterdam",
+            "country": "NL",
+            "currency": "EUR"
+          },
+          "start_date": "26/01/2025",
+          "end_date": "05/02/2025",
+          "passport_issued_country": "UK",
+          "weather": { "temp": 15, "weather_type": "Sunny" },
+          "visa_type": "eVisa",
+          "budget": { "amount": 2000, "currency": "EUR" },
+          "is_booked_hotel": true,
+          "people_count": 1,
+          "city_information": "Capital of Netherlands",
+          "landmarks": {
+            "best_places_to_visit": ["Tower", "City Center", "Museum"],
+            "img_url_of_landmarks": ["", "", ""]
+          },
+          "events": [
+            {
+              "img": "",
+              "date": "15/01/2025",
+              "name": "eminem concert",
+              "price": 1000,
+              "venue": "empty venue"
+            }
+          ],
+          "daily_expected_cost": 200
+        }
+      ]
+    }
+  },
+  "10 - GET /api/trips/:user_id/:trip_id": {
+    "description": "Responds with selected trip",
+    "queries": [],
+    "Example Response": {
+      "trip": {
+        "trip_id": 3,
+        "user_id": 1,
+        "destination": {
+          "city": "Amsterdam",
+          "country": "NL",
+          "currency": "EUR"
+        },
+        "start_date": "26/01/2025",
+        "end_date": "05/02/2025",
+        "passport_issued_country": "UK",
+        "weather": { "temp": 15, "weather_type": "Sunny" },
+        "visa_type": "eVisa",
+        "budget": { "amount": 2000, "currency": "EUR" },
+        "is_booked_hotel": true,
+        "people_count": 1,
+        "city_information": "Capital of Netherlands",
+        "landmarks": {
+          "best_places_to_visit": ["Tower", "City Center", "Museum"],
+          "img_url_of_landmarks": ["", "", ""]
+        },
+        "events": [
+          {
+            "img": "",
+            "date": "15/01/2025",
+            "name": "eminem concert",
+            "price": 1000,
+            "venue": "empty venue"
+          }
+        ],
+        "daily_expected_cost": 200
+      }
+    }
+  },
+  "11 - DELETE /api/trips/:user:id/:trip_id": {
+    "description": "Deletes trip from database",
+    "queries": [],
+    "Example Response": {}
+  },
+  "12 - GET /api/checklists/:user:id/:trip_id": {
+    "description": "Responds with the checklist for selected user's selected trip",
+    "queries": [],
+    "Example Response": {
+      "checklist_id": 1,
+      "trip_id": 1,
+      "user_id": 1,
+      "items": [ "shirt", "trousers", "toiletries", "hats", "laptop" ]
+    }
+  },
+  "13 - POST /api/checklists/:user:id/:trip_id": {
+    "description": "Creates checklist for selected trip's of user ",
+    "queries": [],
+    "Example Post Body ":{
+      "items": ["Laptop", "clothes", "Shoes"]
+    },
+    "Example Response": {
+      "checklist_id": 1,
+      "trip_id": 1,
+      "user_id": 1,
+      "items": ["Laptop", "clothes", "Shoes"]
+    }
+  }
+  ,
+  "14 - PATCH /api/checklists/:user:id/:trip_id": {
+    "description": "Adds new item to the items array",
+    "queries": [],
+    "Example Post Body ":{
+      "newItem": "new item"
+    },
+    "Example Response": {
+      "checklist_id": 1,
+      "trip_id": 1,
+      "user_id": 1,
+      "items": ["Laptop", "clothes", "Shoes","new item"]
+    }
+  },
+  "15 - PATCH /api/checklists/:user:id/:trip_id/delete-item": {
+    "description": "Deletes item from items array",
+    "queries": [],
+    "Example Delete Body ":{
+      "item": "Laptop"
+    },
+    "Example Response": {
+      "checklist_id": 1,
+      "trip_id": 1,
+      "user_id": 1,
+      "items": ["clothes", "Shoes","new item"]
+    }
+  },
+  "16 - DELETE /api/checklists/:user:id/:trip_id": {
+    "description": "Deletes entire checklist"
   }
 }
