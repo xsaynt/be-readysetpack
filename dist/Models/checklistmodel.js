@@ -15,7 +15,16 @@ const fetchSingleChecklist = (user_id, trip_id) => {
 exports.fetchSingleChecklist = fetchSingleChecklist;
 const addChecklist = (user_id, trip_id) => {
     const sqlText = `INSERT INTO checklist(user_id,trip_id,items) VALUES($1,$2,$3) RETURNING*;`;
-    const items = ["Check your passport", "Print or download your tickets (flight/train/bus).", "Pack comfortable T-shirts/tops.", "Dont forget your pants/shorts/skirts.", "Pack comfortable shoes for walking.", "Pack your toothbrush and toothpaste.", "Bring your phone charger.", "Pack a power bank for emergencies."];
+    const items = [
+        'Check your passport',
+        'Print or download your tickets (flight/train/bus).',
+        'Pack comfortable T-shirts/tops.',
+        'Dont forget your pants/shorts/skirts.',
+        'Pack comfortable shoes for walking.',
+        'Pack your toothbrush and toothpaste.',
+        'Bring your phone charger.',
+        'Pack a power bank for emergencies.',
+    ];
     const values = [user_id, trip_id, JSON.stringify(items)];
     return connection_1.default.query(sqlText, values).then(({ rows }) => {
         return rows[0];

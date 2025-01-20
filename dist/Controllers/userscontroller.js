@@ -17,7 +17,7 @@ const getSingleUser = (req, res, next) => {
     const user_id = Number(req.params.user_id);
     const promises = [(0, usersmodel_1.fetchSingleUser)(user_id)];
     if (user_id) {
-        promises.push((0, api_utils_1.checkExist)("users", "user_id", user_id));
+        promises.push((0, api_utils_1.checkExist)('users', 'user_id', user_id));
     }
     Promise.all(promises)
         .then(([user]) => {
@@ -32,7 +32,7 @@ const deleteUser = (req, res, next) => {
     const user_id = Number(req.params.user_id);
     const promises = [(0, usersmodel_1.removeUser)(user_id)];
     if (user_id) {
-        promises.push((0, api_utils_1.checkExist)("users", "user_id", user_id));
+        promises.push((0, api_utils_1.checkExist)('users', 'user_id', user_id));
     }
     Promise.all(promises)
         .then(([removedRow]) => {
@@ -59,9 +59,10 @@ const changeUserInfo = (req, res, next) => {
     const user_id = Number(req.params.user_id);
     const promises = [(0, usersmodel_1.updateUser)(user_id, postBody)];
     if (user_id) {
-        promises.push((0, api_utils_1.checkExist)("users", "user_id", user_id));
+        promises.push((0, api_utils_1.checkExist)('users', 'user_id', user_id));
     }
-    Promise.all(promises).then(([user]) => {
+    Promise.all(promises)
+        .then(([user]) => {
         res.status(200).send({ user });
     })
         .catch((err) => {

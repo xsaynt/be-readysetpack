@@ -57,9 +57,11 @@ const updateUser = (user_id, postBody) => {
     if (nameRegex.test(name)) {
         return Promise.reject({ statusCode: 400, message: 'Bad Request' });
     }
-    const setClause = updateFields.map((field, index) => {
+    const setClause = updateFields
+        .map((field, index) => {
         return `${field} = $${index + 1}`;
-    }).join(`, `);
+    })
+        .join(`, `);
     values.push(Number(user_id));
     const updateQuery = `
     UPDATE users
