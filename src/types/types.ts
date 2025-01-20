@@ -48,8 +48,10 @@ type Weather = {
 	weather_type: string;
 };
 type Budget = {
-	amount: number;
-	currency: string;
+	current_amount: number;
+	current_currency: string;
+	destination_currency: string;
+	destination_amount?: number;
 };
 
 type Landmarks = {
