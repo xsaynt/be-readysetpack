@@ -37,7 +37,9 @@ export const createTrip = async (user_id: number, postBody: Trips) => {
 		daily_expected_cost,
 	} = postBody;
 
-	const cityInfo = await fetchCityInfo(destination.city);
+	/* const cityInfo = await fetchCityInfo(destination.city); */
+
+	let cityInfo:string = "Hello From Here"
 
 	const destination_amount = await fetchExchangeRate(
 		budget.current_currency,
