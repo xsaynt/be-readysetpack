@@ -376,7 +376,6 @@ describe("POST /api/trips/:user_id", () => {
       },
       is_booked_hotel: false,
       people_count: 1,
-      city_information: "Capital of Netherlands",
       landmarks: {
         best_places_to_visit: ["Tower", "City Center", "Museum"],
         img_url_of_landmarks: ["", "", ""],

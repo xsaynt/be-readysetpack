@@ -1,4 +1,5 @@
 import db from '../db/connection';
+import fetchCityInfo from './utils/fetch-city-info'
 import { Trips } from '../types/types';
 
 export const fetchTripsByUserId = (
@@ -14,47 +15,54 @@ export const fetchTripsByUserId = (
 	});
 };
 
-export const createTrip = (user_id: number, postBody: Trips) => {
-	const sqlText: string = `INSERT INTO trips(user_id,destination,start_date,end_date,passport_issued_country,weather,visa_type,budget,is_booked_hotel,people_count,city_information,landmarks,events,daily_expected_cost)
-  VALUES($1,$2,$3,$4,$5,$6,$7,$8,$9,$10,$11,$12,$13,$14) RETURNING*;`;
+export const createTrip = async (user_id: number, postBody: Trips) => {
+	const sqlText: string = `
+	  INSERT INTO trips(user_id, destination, start_date, end_date, passport_issued_country, weather, visa_type, budget, is_booked_hotel, people_count, city_information, landmarks, events, daily_expected_cost)
+	  VALUES($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13, $14) RETURNING*;
+	`;
+  
 	const {
-		destination,
-		start_date,
-		end_date,
-		passport_issued_country,
-		weather,
-		visa_type,
-		budget,
-		is_booked_hotel,
-		people_count,
-		city_information,
-		landmarks,
-		events,
-		daily_expected_cost,
+	  destination,
+	  start_date,
+	  end_date,
+	  passport_issued_country,
+	  weather,
+	  visa_type,
+	  budget,
+	  is_booked_hotel,
+	  people_count,
+	  landmarks,
+	  events,
+	  daily_expected_cost,
 	} = postBody;
-
+  
+	// Fetch city information from Wikipedia
+	const cityInfo = await fetchCityInfo(destination.city); // Assuming 'destination.city' contains the city name
+  
 	const values = [
-		user_id,
-		JSON.stringify(destination),
-		start_date,
-		end_date,
-		passport_issued_country,
-		JSON.stringify(weather),
-		visa_type,
-		JSON.stringify(budget),
-		is_booked_hotel,
-		people_count,
-		city_information,
-		JSON.stringify(landmarks),
-		JSON.stringify(events),
-		daily_expected_cost,
+	  user_id,
+	  JSON.stringify(destination),
+	  start_date,
+	  end_date,
+	  passport_issued_country,
+	  JSON.stringify(weather),
+	  visa_type,
+	  JSON.stringify(budget),
+	  is_booked_hotel,
+	  people_count,
+	  cityInfo, 
+	  JSON.stringify(landmarks),
+	  JSON.stringify(events),
+	  daily_expected_cost,
 	];
-
-	return db.query(sqlText, values).then(({ rows }) => {
-		return rows[0];
-	});
-};
-
+  
+	try {
+	  const { rows } = await db.query(sqlText, values);
+	  return rows[0];
+	} catch (error) {
+	}
+  };
+  
 export const changeTripData = (
 	user_id: number,
 	trip_id: number,
