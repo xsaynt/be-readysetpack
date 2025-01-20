@@ -14,7 +14,6 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.deleteSingleTrip = exports.fetchSingleTrip = exports.changeTripData = exports.createTrip = exports.fetchTripsByUserId = void 0;
 const connection_1 = __importDefault(require("../db/connection"));
-const convert_currency_1 = __importDefault(require("./utils/convert_currency"));
 const fetchTripsByUserId = (user_id, sort_by = 'trip_id', order = 'DESC') => {
     let sqlText = `SELECT * FROM trips WHERE user_id = $1 ORDER BY ${sort_by} ${order};`;
     const values = [user_id];
@@ -30,7 +29,6 @@ const createTrip = (user_id, postBody) => __awaiter(void 0, void 0, void 0, func
 	`;
     const { destination, start_date, end_date, passport_issued_country, weather, visa_type, budget, is_booked_hotel, people_count, landmarks, events, daily_expected_cost, } = postBody;
     let cityInfo = "Hello From Here";
-    const destination_amount = yield (0, convert_currency_1.default)(budget.current_currency, budget.destination_currency, budget.current_amount);
     const values = [
         user_id,
         JSON.stringify(destination),
@@ -39,7 +37,7 @@ const createTrip = (user_id, postBody) => __awaiter(void 0, void 0, void 0, func
         passport_issued_country,
         JSON.stringify(weather),
         visa_type,
-        JSON.stringify(Object.assign(Object.assign({}, budget), { destination_amount: destination_amount })),
+        JSON.stringify(Object.assign(Object.assign({}, budget), { destination_amount: 150 })),
         is_booked_hotel,
         people_count,
         cityInfo,

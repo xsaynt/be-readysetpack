@@ -41,11 +41,11 @@ export const createTrip = async (user_id: number, postBody: Trips) => {
 
 	let cityInfo:string = "Hello From Here"
 
-	const destination_amount = await fetchExchangeRate(
+/* 	const destination_amount = await fetchExchangeRate(
 		budget.current_currency,
 		budget.destination_currency,
 		budget.current_amount
-	);
+	); */
 
 	const values = [
 		user_id,
@@ -55,7 +55,7 @@ export const createTrip = async (user_id: number, postBody: Trips) => {
 		passport_issued_country,
 		JSON.stringify(weather),
 		visa_type,
-		JSON.stringify({ ...budget, destination_amount: destination_amount }),
+		JSON.stringify({ ...budget, destination_amount: 150 }),
 		is_booked_hotel,
 		people_count,
 		cityInfo,
