@@ -181,7 +181,7 @@ describe('PATCH api/users/:user_id', () => {
             expect(user).toEqual({
                 user_id: 1,
                 username: 'alexonur',
-                name: 'alex',
+                name: 'Alex',
             });
         });
     });
@@ -249,7 +249,7 @@ describe('GET /api/dailyCost/:country', () => {
             .expect(200)
             .then(({ body: { countryInfo } }) => {
             expect(countryInfo).toEqual({
-                country: 'UK',
+                country: 'GB',
                 daily_cost_in_dollars: 2000,
             });
         });

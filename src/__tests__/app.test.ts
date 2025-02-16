@@ -196,7 +196,7 @@ describe('PATCH api/users/:user_id', () => {
 				expect(user).toEqual({
 					user_id: 1,
 					username: 'alexonur',
-					name: 'alex',
+					name: 'Alex',
 				});
 			});
 	});
@@ -265,12 +265,12 @@ describe('PATCH api/users/:user_id', () => {
 describe('GET /api/dailyCost/:country', () => {
 	test('200: Responds with correct daily cost based on input destination', () => {
 		return request(app)
-			.get('/api/dailyCost/UK')
+			.get('/api/dailyCost/GB')
 			.expect(200)
 			.then(({ body: { countryInfo } }) => {
 				expect(countryInfo).toEqual({
-					country: 'UK',
-					daily_cost_in_dollars: 2000,
+					country: 'GB',
+					daily_cost_in_dollars: 200,
 				});
 			});
 	});

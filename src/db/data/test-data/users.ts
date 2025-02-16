@@ -3,23 +3,23 @@ import { Users } from '../../../types/types';
 const usersData: Users[] = [
 	{
 		username: 'alex123',
-		name: 'alex',
+		name: 'Alex',
 	},
 	{
 		username: 'matthew123',
-		name: 'matthew',
+		name: 'Matthew',
 	},
 	{
 		username: 'kaye123',
-		name: 'kaye',
+		name: 'Kaye',
 	},
 	{
 		username: 'clare123',
-		name: 'clare',
+		name: 'Clare',
 	},
 	{
 		username: 'onur123',
-		name: 'onur',
+		name: 'Onur',
 	},
 ];
 

@@ -10,7 +10,7 @@ const tripsData: Trips[] = [
 		},
 		start_date: '13/01/2025',
 		end_date: '23/01/2025',
-		passport_issued_country: 'UK',
+		passport_issued_country: 'GB',
 		weather: {
 			temp: 20,
 			weather_type: 'Sunny',
@@ -18,9 +18,9 @@ const tripsData: Trips[] = [
 		visa_type: 'eVisa',
 		budget: {
 			current_amount: 2000,
-			current_currency: 'EUR',
-			destination_currency: 'TRY',
-			destination_amount: 3000,
+			current_currency: 'GBP',
+			destination_currency: 'EUR',
+			destination_amount: 2400,
 		},
 		is_booked_hotel: true,
 		people_count: 1,
@@ -49,7 +49,7 @@ const tripsData: Trips[] = [
 		},
 		start_date: '13/01/2025',
 		end_date: '23/01/2025',
-		passport_issued_country: 'UK',
+		passport_issued_country: 'GB',
 		weather: {
 			temp: 10,
 			weather_type: 'Cloudly',
@@ -57,9 +57,9 @@ const tripsData: Trips[] = [
 		visa_type: 'eVisa',
 		budget: {
 			current_amount: 2000,
-			current_currency: 'EUR',
-			destination_currency: 'TRY',
-			destination_amount: 3000,
+			current_currency: 'GBP',
+			destination_currency: 'EUR',
+			destination_amount: 2400,
 		},
 		is_booked_hotel: false,
 		people_count: 2,
@@ -88,7 +88,7 @@ const tripsData: Trips[] = [
 		},
 		start_date: '26/01/2025',
 		end_date: '05/02/2025',
-		passport_issued_country: 'UK',
+		passport_issued_country: 'GB',
 		weather: {
 			temp: 15,
 			weather_type: 'Sunny',
@@ -96,9 +96,9 @@ const tripsData: Trips[] = [
 		visa_type: 'eVisa',
 		budget: {
 			current_amount: 2000,
-			current_currency: 'EUR',
-			destination_currency: 'TRY',
-			destination_amount: 3000,
+			current_currency: 'GBP',
+			destination_currency: 'EUR',
+			destination_amount: 2400,
 		},
 		is_booked_hotel: true,
 		people_count: 1,
@@ -119,3 +119,5 @@ const tripsData: Trips[] = [
 		daily_expected_cost: 200,
 	},
 ];
+
+export default tripsData;

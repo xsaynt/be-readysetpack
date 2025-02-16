@@ -2,21 +2,21 @@ import { DailyExpectedCost } from '../../../types/types';
 
 const costsData: DailyExpectedCost[] = [
 	{
-		country: 'UK',
-		daily_cost_in_dollars: 2000,
+		country: 'GB',
+		daily_cost_in_dollars: 200,
 	},
 	{
 		country: 'US',
-		daily_cost_in_dollars: 1500,
+		daily_cost_in_dollars: 150,
 	},
 	{
 		country: 'TR',
-		daily_cost_in_dollars: 1000,
+		daily_cost_in_dollars: 100,
 	},
 	{
 		country: 'DE',
-		daily_cost_in_dollars: 1250,
+		daily_cost_in_dollars: 125,
 	},
 ];
 
-export default costsData
+export default costsData;
