@@ -6,7 +6,6 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const pg_1 = require("pg");
 const dotenv_1 = __importDefault(require("dotenv"));
 const ENV = process.env.NODE_ENV || 'development';
-console.log(process.env.NODE_ENV, ENV);
 dotenv_1.default.config({
     path: `${__dirname}/../../.env.${ENV}`,
 });

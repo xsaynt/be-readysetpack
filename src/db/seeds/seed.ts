@@ -1,16 +1,6 @@
 import db from '../connection';
 import format from 'pg-format';
-import {
-	Users,
-	Trips,
-	Checklist,
-	DailyExpectedCost,
-	Destination,
-	Weather,
-	Budget,
-	Landmarks,
-	Events,
-} from '../../types/types';
+import { Users, Trips, Checklist, DailyExpectedCost } from '../../types/types';
 
 const seed = ({
 	usersData,
