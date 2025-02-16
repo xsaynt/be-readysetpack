@@ -3,10 +3,10 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-const users_1 = __importDefault(require("../data/test-data/users"));
-const trips_1 = __importDefault(require("../data/test-data/trips"));
-const checklist_1 = __importDefault(require("../data/test-data/checklist"));
-const dailycost_1 = __importDefault(require("../data/test-data/dailycost"));
+const users_1 = __importDefault(require("../data/development-data/users"));
+const trips_1 = __importDefault(require("../data/development-data/trips"));
+const checklist_1 = __importDefault(require("../data/development-data/checklist"));
+const dailycost_1 = __importDefault(require("../data/development-data/dailycost"));
 const seed_1 = __importDefault(require("./seed"));
 const connection_1 = __importDefault(require("../connection"));
 const runSeed = () => {
