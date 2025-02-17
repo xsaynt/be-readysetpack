@@ -10,10 +10,10 @@ const getSingleChecklist = (req, res, next) => {
         (0, checklistmodel_1.fetchSingleChecklist)(user_id, trip_id),
     ];
     if (user_id) {
-        promises.push((0, api_utils_1.checkExist)("users", "user_id", user_id));
+        promises.push((0, api_utils_1.checkExist)('users', 'user_id', user_id));
     }
     if (trip_id) {
-        promises.push((0, api_utils_1.checkExist)("trips", "trip_id", trip_id));
+        promises.push((0, api_utils_1.checkExist)('trips', 'trip_id', trip_id));
     }
     Promise.all(promises)
         .then(([checklist]) => {
@@ -32,10 +32,10 @@ const postChecklist = (req, res, next) => {
         (0, checklistmodel_1.addChecklist)(user_id, trip_id),
     ];
     if (user_id) {
-        promises.push((0, api_utils_1.checkExist)("users", "user_id", user_id));
+        promises.push((0, api_utils_1.checkExist)('users', 'user_id', user_id));
     }
     if (trip_id) {
-        promises.push((0, api_utils_1.checkExist)("trips", "trip_id", trip_id));
+        promises.push((0, api_utils_1.checkExist)('trips', 'trip_id', trip_id));
     }
     Promise.all(promises)
         .then(([checklist]) => {
@@ -54,10 +54,10 @@ const updateChecklistItems = (req, res, next) => {
         (0, checklistmodel_1.addItemsToChecklist)(user_id, trip_id, postBody),
     ];
     if (user_id) {
-        promises.push((0, api_utils_1.checkExist)("users", "user_id", user_id));
+        promises.push((0, api_utils_1.checkExist)('users', 'user_id', user_id));
     }
     if (trip_id) {
-        promises.push((0, api_utils_1.checkExist)("trips", "trip_id", trip_id));
+        promises.push((0, api_utils_1.checkExist)('trips', 'trip_id', trip_id));
     }
     Promise.all(promises)
         .then(([checklist]) => {
@@ -71,21 +71,22 @@ exports.updateChecklistItems = updateChecklistItems;
 const deleteSingleItemFromItems = (req, res, next) => {
     const user_id = Number(req.params.user_id);
     const trip_id = Number(req.params.trip_id);
-    const deleteBody = req.body.item;
+    const deleteBody = req.body;
     const promises = [
         (0, checklistmodel_1.removeSingleItemFromItemsArray)(user_id, trip_id, deleteBody),
     ];
     if (user_id) {
-        promises.push((0, api_utils_1.checkExist)("users", "user_id", user_id));
+        promises.push((0, api_utils_1.checkExist)('users', 'user_id', user_id));
     }
     if (trip_id) {
-        promises.push((0, api_utils_1.checkExist)("trips", "trip_id", trip_id));
+        promises.push((0, api_utils_1.checkExist)('trips', 'trip_id', trip_id));
     }
     Promise.all(promises)
         .then(([checklist]) => {
         res.status(200).send({ checklist });
     })
         .catch((err) => {
+        console.log(err);
         next(err);
     });
 };

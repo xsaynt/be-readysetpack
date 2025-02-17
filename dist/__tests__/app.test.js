@@ -753,7 +753,9 @@ describe('POST /api/checklists/:user_id/:trip_id', () => {
 });
 describe('PATCH /api/checklists/:user_id/:trip_id/', () => {
     test('200: Should patch checklist items ', () => {
-        const inputChecklistItem = { newItem: 'new item' };
+        const inputChecklistItem = {
+            newItem: { task: 'New Item' },
+        };
         return (0, supertest_1.default)(app_1.default)
             .patch('/api/checklists/1/1')
             .send(inputChecklistItem)
@@ -764,15 +766,18 @@ describe('PATCH /api/checklists/:user_id/:trip_id/', () => {
                 trip_id: 1,
                 user_id: 1,
                 items: [
-                    'Check your passport',
-                    'Print or download your tickets (flight/train/bus).',
-                    'Pack comfortable T-shirts/tops.',
-                    'Dont forget your pants/shorts/skirts.',
-                    'Pack comfortable shoes for walking.',
-                    'Pack your toothbrush and toothpaste.',
-                    'Bring your phone charger.',
-                    'Pack a power bank for emergencies.',
-                    'new item',
+                    { task: 'Check your passport', completed: false },
+                    {
+                        task: 'Print or download your tickets (flight/train/bus).',
+                        completed: false,
+                    },
+                    { task: 'Pack comfortable T-shirts/tops.', completed: false },
+                    { task: 'Dont forget your pants/shorts/skirts.', completed: false },
+                    { task: 'Pack comfortable shoes for walking.', completed: false },
+                    { task: 'Pack your toothbrush and toothpaste.', completed: false },
+                    { task: 'Bring your phone charger.', completed: false },
+                    { task: 'Pack a power bank for emergencies.', completed: false },
+                    { task: 'New Item', completed: false },
                 ],
             });
         });
@@ -820,7 +825,7 @@ describe('PATCH /api/checklists/:user_id/:trip_id/', () => {
 });
 describe('PATCH /api/checklists/:user_id/:trip_id/delete-item (Deleting single item from items array)', () => {
     test('200: Should delete single item from items array ', () => {
-        const deleteChecklistItem = { item: 'Check your passport' };
+        const deleteChecklistItem = { task: 'Check your passport' };
         return (0, supertest_1.default)(app_1.default)
             .patch('/api/checklists/1/1/delete-item')
             .send(deleteChecklistItem)
@@ -831,21 +836,24 @@ describe('PATCH /api/checklists/:user_id/:trip_id/delete-item (Deleting single i
                 trip_id: 1,
                 user_id: 1,
                 items: [
-                    'Print or download your tickets (flight/train/bus).',
-                    'Pack comfortable T-shirts/tops.',
-                    'Dont forget your pants/shorts/skirts.',
-                    'Pack comfortable shoes for walking.',
-                    'Pack your toothbrush and toothpaste.',
-                    'Bring your phone charger.',
-                    'Pack a power bank for emergencies.',
+                    {
+                        task: 'Print or download your tickets (flight/train/bus).',
+                        completed: false,
+                    },
+                    { task: 'Pack comfortable T-shirts/tops.', completed: false },
+                    { task: 'Dont forget your pants/shorts/skirts.', completed: false },
+                    { task: 'Pack comfortable shoes for walking.', completed: false },
+                    { task: 'Pack your toothbrush and toothpaste.', completed: false },
+                    { task: 'Bring your phone charger.', completed: false },
+                    { task: 'Pack a power bank for emergencies.', completed: false },
                 ],
             });
         });
     });
     test('404: Should return an error msg if user id does not exist ', () => {
-        const deleteChecklistItem = { item: 'Check your passport' };
+        const deleteChecklistItem = { task: 'Check your passport' };
         return (0, supertest_1.default)(app_1.default)
-            .patch('/api/checklists/10/1')
+            .patch('/api/checklists/10/1/delete-item')
             .send(deleteChecklistItem)
             .expect(404)
             .then((response) => {
@@ -853,9 +861,9 @@ describe('PATCH /api/checklists/:user_id/:trip_id/delete-item (Deleting single i
         });
     });
     test('404: Should return an error msg if trip id does not exist ', () => {
-        const deleteChecklistItem = { item: 'Check your passport' };
+        const deleteChecklistItem = { task: 'Check your passport' };
         return (0, supertest_1.default)(app_1.default)
-            .patch('/api/checklists/1/10')
+            .patch('/api/checklists/1/10/delete-item')
             .send(deleteChecklistItem)
             .expect(404)
             .then((response) => {
@@ -863,9 +871,9 @@ describe('PATCH /api/checklists/:user_id/:trip_id/delete-item (Deleting single i
         });
     });
     test('400: Should return an error msg if user id is string ', () => {
-        const deleteChecklistItem = { item: 'Check your passport' };
+        const deleteChecklistItem = { task: 'Check your passport' };
         return (0, supertest_1.default)(app_1.default)
-            .patch('/api/checklists/abc/1')
+            .patch('/api/checklists/abc/1/delete-item')
             .send(deleteChecklistItem)
             .expect(400)
             .then((response) => {
@@ -873,9 +881,9 @@ describe('PATCH /api/checklists/:user_id/:trip_id/delete-item (Deleting single i
         });
     });
     test('400: Should return an error msg if trip id is string ', () => {
-        const deleteChecklistItem = { item: 'Check your passport' };
+        const deleteChecklistItem = { task: 'Check your passport' };
         return (0, supertest_1.default)(app_1.default)
-            .patch('/api/checklists/1/abc')
+            .patch('/api/checklists/1/abc/delete-item')
             .send(deleteChecklistItem)
             .expect(400)
             .then((response) => {

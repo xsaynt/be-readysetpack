@@ -33,13 +33,15 @@ export const addChecklist = (user_id: number, trip_id: number) => {
 export const addItemsToChecklist = (
 	user_id: number,
 	trip_id: number,
-	postBody: string
+	postBody: { task: string }
 ) => {
-	const values = [postBody, user_id, trip_id];
+	const newItem = { task: postBody.task, completed: false };
+
+	const values = [JSON.stringify(newItem), user_id, trip_id];
 
 	const sqlText = `
         UPDATE checklist
-        SET items = items || to_jsonb($1::text)
+        SET items = COALESCE(items, '[]'::jsonb) || $1::jsonb
         WHERE user_id = $2 AND trip_id = $3
         RETURNING *;
     `;
@@ -52,16 +54,16 @@ export const addItemsToChecklist = (
 export const removeSingleItemFromItemsArray = (
 	user_id: number,
 	trip_id: number,
-	deleteBody: string
+	deleteBody: { task: string }
 ) => {
-	const values = [deleteBody, user_id, trip_id];
+	const values = [deleteBody.task, user_id, trip_id];
 
-	const sqlText: string = `
+	const sqlText = `
     UPDATE checklist
     SET items = (
         SELECT jsonb_agg(elem)
         FROM jsonb_array_elements(items) AS elem
-        WHERE elem <> to_jsonb($1::text)
+        WHERE elem->>'task' <> $1
     )
     WHERE user_id = $2 AND trip_id = $3
     RETURNING *;

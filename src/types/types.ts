@@ -27,7 +27,7 @@ type Checklist = {
 	checklist_id?: number;
 	trip_id: number;
 	user_id: number;
-	items: string[];
+	items: { task: string; completed: boolean }[];
 };
 
 type DailyExpectedCost = {
