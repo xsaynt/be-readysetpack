@@ -30,7 +30,6 @@ export const getSingleChecklist = (
 
 	Promise.all(promises)
 		.then(([checklist]) => {
-			console.log({ checklist });
 			res.status(200).send({ checklist });
 		})
 		.catch((err) => {
