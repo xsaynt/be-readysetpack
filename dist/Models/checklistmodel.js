@@ -1,17 +1,35 @@
 "use strict";
+var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
+    function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
+    return new (P || (P = Promise))(function (resolve, reject) {
+        function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
+        function rejected(value) { try { step(generator["throw"](value)); } catch (e) { reject(e); } }
+        function step(result) { result.done ? resolve(result.value) : adopt(result.value).then(fulfilled, rejected); }
+        step((generator = generator.apply(thisArg, _arguments || [])).next());
+    });
+};
 var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.deleteEntireChecklist = exports.removeSingleItemFromItemsArray = exports.addItemsToChecklist = exports.addChecklist = exports.fetchSingleChecklist = void 0;
 const connection_1 = __importDefault(require("../db/connection"));
-const fetchSingleChecklist = (user_id, trip_id) => {
+const fetchSingleChecklist = (user_id, trip_id) => __awaiter(void 0, void 0, void 0, function* () {
     const sqlText = `SELECT * FROM checklist WHERE user_id = $1 AND trip_id = $2;`;
     const values = [user_id, trip_id];
-    return connection_1.default.query(sqlText, values).then(({ rows }) => {
-        return rows[0];
-    });
-};
+    const { rows } = yield connection_1.default.query(sqlText, values);
+    if (rows.length === 0) {
+        const insertQuery = `
+		INSERT INTO checklist (user_id, trip_id, items) 
+		VALUES ($1, $2, $3) 
+		RETURNING *;
+	  `;
+        const insertValues = [user_id, trip_id, JSON.stringify([])];
+        const { rows: newRows } = yield connection_1.default.query(insertQuery, insertValues);
+        return newRows[0];
+    }
+    return rows[0];
+});
 exports.fetchSingleChecklist = fetchSingleChecklist;
 const addChecklist = (user_id, trip_id) => {
     const sqlText = `INSERT INTO checklist(user_id,trip_id,items) VALUES($1,$2,$3) RETURNING*;`;
