@@ -79,7 +79,7 @@ describe('GET /api/users/:user_id', () => {
 			.get('/api/users/10')
 			.expect(404)
 			.then((response: Response) => {
-				expect(response.body.msg).toBe('Does Not Found');
+				expect(response.body.msg).toBe('Not Found');
 			});
 	});
 	test('400: Responds with msg when the user_id is not a number', () => {
@@ -101,7 +101,7 @@ describe('DELETE /api/user/:user_id', () => {
 			.delete('/api/users/10')
 			.expect(404)
 			.then((response: Response) => {
-				expect(response.body.msg).toBe('Does Not Found');
+				expect(response.body.msg).toBe('Not Found');
 			});
 	});
 	test('400: Responds with msg when the user_id is not a number ', () => {
@@ -257,7 +257,7 @@ describe('PATCH api/users/:user_id', () => {
 			.send(userData)
 			.expect(404)
 			.then((response: Response) => {
-				expect(response.body.msg).toBe('Does Not Found');
+				expect(response.body.msg).toBe('Not Found');
 			});
 	});
 });
@@ -279,7 +279,7 @@ describe('GET /api/dailyCost/:country', () => {
 			.get('/api/dailyCost/unknowncountry')
 			.expect(404)
 			.then((response: Response) => {
-				expect(response.body.msg).toBe('Does Not Found');
+				expect(response.body.msg).toBe('Not Found');
 			});
 	});
 });
@@ -351,7 +351,7 @@ describe('GET /api/trips/:user_id', () => {
 			.get('/api/trips/10')
 			.expect(404)
 			.then((response: Response) => {
-				expect(response.body.msg).toBe('Does Not Found');
+				expect(response.body.msg).toBe('Not Found');
 			});
 	});
 });
@@ -485,7 +485,7 @@ describe('POST /api/trips/:user_id', () => {
 			.send(tripData)
 			.expect(404)
 			.then((response: Response) => {
-				expect(response.body.msg).toBe('Does Not Found');
+				expect(response.body.msg).toBe('Not Found');
 			});
 	});
 });
@@ -566,7 +566,7 @@ describe('PATCH /api/trips/:user_id/:trip_id', () => {
 			.send(tripData)
 			.expect(404)
 			.then((response: Response) => {
-				expect(response.body.msg).toBe('Does Not Found');
+				expect(response.body.msg).toBe('Not Found');
 			});
 	});
 	test('404: Responds with an error when given incorrect trip_id', () => {
@@ -583,7 +583,7 @@ describe('PATCH /api/trips/:user_id/:trip_id', () => {
 			.send(tripData)
 			.expect(404)
 			.then((response: Response) => {
-				expect(response.body.msg).toBe('Does Not Found');
+				expect(response.body.msg).toBe('Not Found');
 			});
 	});
 	test('400: Responds with an error when trying to change incorrect column', () => {
@@ -684,7 +684,7 @@ describe('DELETE /api/trips/:user_id/:trip_id', () => {
 			.delete('/api/trips/1/100')
 			.expect(404)
 			.then((response: Response) => {
-				expect(response.body.msg).toBe('Does Not Found');
+				expect(response.body.msg).toBe('Not Found');
 			});
 	});
 	test('400: Responds with msg when the trip_id is not a number ', () => {
@@ -718,7 +718,7 @@ describe('GET /api/checklists/:user_id/:trip_id', () => {
 			.get('/api/checklists/10/1')
 			.expect(404)
 			.then((response: Response) => {
-				expect(response.body.msg).toBe('Does Not Found');
+				expect(response.body.msg).toBe('Not Found');
 			});
 	});
 	test('404: Returns an error when passed incorrect/not exist trip id', () => {
@@ -726,7 +726,7 @@ describe('GET /api/checklists/:user_id/:trip_id', () => {
 			.get('/api/checklists/1/10')
 			.expect(404)
 			.then((response: Response) => {
-				expect(response.body.msg).toBe('Does Not Found');
+				expect(response.body.msg).toBe('Not Found');
 			});
 	});
 	test('400: Returns an error when passed string as trip_id', () => {
@@ -768,7 +768,7 @@ describe('POST /api/checklists/:user_id/:trip_id', () => {
 			.post('/api/checklists/10/1')
 			.expect(404)
 			.then((response: Response) => {
-				expect(response.body.msg).toBe('Does Not Found');
+				expect(response.body.msg).toBe('Not Found');
 			});
 	});
 	test('404: Returns an error when passed incorrect/not exist trip id', () => {
@@ -776,7 +776,7 @@ describe('POST /api/checklists/:user_id/:trip_id', () => {
 			.post('/api/checklists/1/10')
 			.expect(404)
 			.then((response: Response) => {
-				expect(response.body.msg).toBe('Does Not Found');
+				expect(response.body.msg).toBe('Not Found');
 			});
 	});
 
@@ -836,7 +836,7 @@ describe('PATCH /api/checklists/:user_id/:trip_id/', () => {
 			.send(inputChecklistItem)
 			.expect(404)
 			.then((response: Response) => {
-				expect(response.body.msg).toBe('Does Not Found');
+				expect(response.body.msg).toBe('Not Found');
 			});
 	});
 	test('404: Should return an error msg if trip id does not exist ', () => {
@@ -846,7 +846,7 @@ describe('PATCH /api/checklists/:user_id/:trip_id/', () => {
 			.send(inputChecklistItem)
 			.expect(404)
 			.then((response: Response) => {
-				expect(response.body.msg).toBe('Does Not Found');
+				expect(response.body.msg).toBe('Not Found');
 			});
 	});
 	test('400: Should return an error msg if user id is string ', () => {
@@ -905,7 +905,7 @@ describe('PATCH /api/checklists/:user_id/:trip_id/delete-item (Deleting single i
 			.send(deleteChecklistItem)
 			.expect(404)
 			.then((response: Response) => {
-				expect(response.body.msg).toBe('Does Not Found');
+				expect(response.body.msg).toBe('Not Found');
 			});
 	});
 	test('404: Should return an error msg if trip id does not exist ', () => {
@@ -915,7 +915,7 @@ describe('PATCH /api/checklists/:user_id/:trip_id/delete-item (Deleting single i
 			.send(deleteChecklistItem)
 			.expect(404)
 			.then((response: Response) => {
-				expect(response.body.msg).toBe('Does Not Found');
+				expect(response.body.msg).toBe('Not Found');
 			});
 	});
 	test('400: Should return an error msg if user id is string ', () => {
@@ -949,7 +949,7 @@ describe('DELETE /api/checklists/:user_id/:trip_id', () => {
 			.delete('/api/checklists/10/1')
 			.expect(404)
 			.then((response: Response) => {
-				expect(response.body.msg).toBe('Does Not Found');
+				expect(response.body.msg).toBe('Not Found');
 			});
 	});
 	test('404: Should return an error msg if trip id does not exist ', () => {
@@ -957,7 +957,7 @@ describe('DELETE /api/checklists/:user_id/:trip_id', () => {
 			.delete('/api/checklists/1/10')
 			.expect(404)
 			.then((response: Response) => {
-				expect(response.body.msg).toBe('Does Not Found');
+				expect(response.body.msg).toBe('Not Found');
 			});
 	});
 	test('400: Should return an error msg if user id is string ', () => {

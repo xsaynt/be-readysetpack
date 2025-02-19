@@ -16,10 +16,10 @@ exports.checkExist = void 0;
 const pg_format_1 = __importDefault(require("pg-format"));
 const connection_1 = __importDefault(require("../db/connection"));
 const checkExist = (table, column, value) => __awaiter(void 0, void 0, void 0, function* () {
-    const queryStr = (0, pg_format_1.default)("SELECT * FROM %I WHERE %I = $1", table, column);
+    const queryStr = (0, pg_format_1.default)('SELECT * FROM %I WHERE %I = $1', table, column);
     const dbOutput = yield connection_1.default.query(queryStr, [value]);
     if (dbOutput.rows.length === 0) {
-        return Promise.reject({ statusCode: 404, message: "Does Not Found" });
+        return Promise.reject({ statusCode: 404, message: 'Not Found' });
     }
 });
 exports.checkExist = checkExist;

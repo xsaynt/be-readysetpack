@@ -25,7 +25,7 @@ const postgresErrorHandler = (err, req, res, next) => {
     else if (err.code === '23503' ||
         err.code === '42703' ||
         err.code === '42601') {
-        res.status(404).send({ msg: 'Does Not Found' });
+        res.status(404).send({ msg: 'Not Found' });
     }
     else {
         next(err);

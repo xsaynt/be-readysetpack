@@ -4,10 +4,10 @@ class AppError extends Error {
 	statusCode: number;
 	code: string;
 
-	constructor(message: string, statusCode: number, code:string) {
+	constructor(message: string, statusCode: number, code: string) {
 		super(message);
 		this.statusCode = statusCode;
-		this.code = code
+		this.code = code;
 		Object.setPrototypeOf(this, new.target.prototype);
 	}
 }
@@ -38,7 +38,7 @@ export const postgresErrorHandler = (
 		err.code === '42703' ||
 		err.code === '42601'
 	) {
-		res.status(404).send({ msg: 'Does Not Found' });
+		res.status(404).send({ msg: 'Not Found' });
 	} else {
 		next(err);
 	}
