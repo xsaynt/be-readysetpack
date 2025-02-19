@@ -51,15 +51,27 @@ const addChecklist = (user_id, trip_id) => {
 exports.addChecklist = addChecklist;
 const addItemsToChecklist = (user_id, trip_id, postBody) => {
     const newItem = { task: postBody.task, completed: false };
-    const values = [JSON.stringify(newItem), user_id, trip_id];
-    const sqlText = `
-        UPDATE checklist
-        SET items = COALESCE(items, '[]'::jsonb) || $1::jsonb
-        WHERE user_id = $2 AND trip_id = $3
-        RETURNING *;
-    `;
-    return connection_1.default.query(sqlText, values).then(({ rows }) => {
-        return rows[0];
+    const values = [JSON.stringify([newItem]), user_id, trip_id];
+    const updateSqlText = `
+	  UPDATE checklist
+	  SET items = COALESCE(items, '[]'::jsonb) || $1::jsonb
+	  WHERE user_id = $2 AND trip_id = $3
+	  RETURNING *;
+	`;
+    const insertSqlText = `
+	  INSERT INTO checklist (user_id, trip_id, items)
+	  VALUES ($2, $3, $1)
+	  RETURNING *;
+	`;
+    return connection_1.default.query(updateSqlText, values).then(({ rows }) => {
+        if (rows.length > 0) {
+            return rows[0];
+        }
+        else {
+            return connection_1.default.query(insertSqlText, values).then(({ rows }) => {
+                return rows[0];
+            });
+        }
     });
 };
 exports.addItemsToChecklist = addItemsToChecklist;
